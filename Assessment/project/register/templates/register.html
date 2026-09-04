@@ -1,0 +1,136 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beneficiary Registration Form</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="register-page">
+    <main id="app-shell" class="register-shell" aria-live="polite">
+        <aside class="brand-panel" aria-label="Program branding">
+            <div class="brand-logo-circle">
+                <img src="{% static 'logo & colors/fca-logo.jpg' %}" alt="FCA logo" class="brand-logo-image">
+            </div>
+            <h1>Refugee Support Program</h1>
+        </aside>
+
+        <section class="form-panel" aria-labelledby="registration-title">
+            <h2 id="registration-title">Beneficiary Registration Form</h2>
+
+            {% if success %}
+                <div class="success-alert" role="alert">
+                    <span>Beneficiary registered successfully</span>
+                    <span class="close" aria-hidden="true">×</span>
+                </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                <div class="form-grid">
+                    <div class="field-group {% if request.POST and not request.POST.firstName %}has-error{% endif %}">
+                        <label for="firstName">First Name <span>*</span></label>
+                        <input id="firstName" name="firstName" type="text" placeholder="Enter your First name" value="{{ request.POST.firstName|default:'' }}" {% if not request.POST.firstName %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.firstName %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.lastName %}has-error{% endif %}">
+                        <label for="lastName">Last name <span>*</span></label>
+                        <input id="lastName" name="lastName" type="text" placeholder="Enter your Last name" value="{{ request.POST.lastName|default:'' }}" {% if not request.POST.lastName %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.lastName %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.dateOfBirth %}has-error{% endif %}">
+                        <label for="dateOfBirth">Date of birth <span>*</span></label>
+                        <input id="dateOfBirth" name="dateOfBirth" type="date" value="{{ request.POST.dateOfBirth|default:'' }}" {% if not request.POST.dateOfBirth %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.dateOfBirth %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.placeOfBirth %}has-error{% endif %}">
+                        <label for="placeOfBirth">Place of Birth <span>*</span></label>
+                        <input id="placeOfBirth" name="placeOfBirth" type="text" placeholder="Enter your place of residence" value="{{ request.POST.placeOfBirth|default:'' }}" {% if not request.POST.placeOfBirth %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.placeOfBirth %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+                </div>
+
+                <div class="field-group gender-group">
+                    <label>Gender</label>
+                    <div class="radio-row">
+                        <label class="radio-option">
+                            <input type="radio" name="gender" value="Male" {% if request.POST.gender == 'Male' %}checked{% endif %}>
+                            <span>Male</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="gender" value="Female" {% if request.POST.gender == 'Female' or not request.POST.gender %}checked{% endif %}>
+                            <span>Female</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid lower-grid">
+                    <div class="field-group {% if request.POST and not request.POST.nationality %}has-error{% endif %}">
+                        <label for="nationality">Nationality <span>*</span></label>
+                        <select id="nationality" name="nationality" {% if not request.POST.nationality %}class="invalid"{% endif %}>
+                            <option value="">-- Select Nationality --</option>
+                            <option value="Ugandan" {% if request.POST.nationality == 'Ugandan' %}selected{% endif %}>Ugandan</option>
+                            <option value="Kenyan" {% if request.POST.nationality == 'Kenyan' %}selected{% endif %}>Kenyan</option>
+                            <option value="Tanzanian" {% if request.POST.nationality == 'Tanzanian' %}selected{% endif %}>Tanzanian</option>
+                            <option value="Burundian" {% if request.POST.nationality == 'Burundian' %}selected{% endif %}>Burundian</option>
+                            <option value="Rwandese" {% if request.POST.nationality == 'Rwandese' %}selected{% endif %}>Rwandese</option>
+                            <option value="Somali" {% if request.POST.nationality == 'Somali' %}selected{% endif %}>Somali</option>
+                            <option value="South Sudanese" {% if request.POST.nationality == 'South Sudanese' %}selected{% endif %}>South Sudanese</option>
+                        </select>
+                        {% if request.POST and not request.POST.nationality %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.maritalStatus %}has-error{% endif %}">
+                        <label for="maritalStatus">Marital status <span>*</span></label>
+                        <select id="maritalStatus" name="maritalStatus" {% if not request.POST.maritalStatus %}class="invalid"{% endif %}>
+                            <option value="">-- Select Marital status --</option>
+                            <option value="Single" {% if request.POST.maritalStatus == 'Single' %}selected{% endif %}>Single</option>
+                            <option value="Married" {% if request.POST.maritalStatus == 'Married' %}selected{% endif %}>Married</option>
+                            <option value="Divorced" {% if request.POST.maritalStatus == 'Divorced' %}selected{% endif %}>Divorced</option>
+                            <option value="Widowed" {% if request.POST.maritalStatus == 'Widowed' %}selected{% endif %}>Widowed</option>
+                            <option value="Separated" {% if request.POST.maritalStatus == 'Separated' %}selected{% endif %}>Separated</option>
+                        </select>
+                        {% if request.POST and not request.POST.maritalStatus %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.settlementCamp %}has-error{% endif %}">
+                        <label for="settlementCamp">Settlement camp <span>*</span></label>
+                        <select id="settlementCamp" name="settlementCamp" {% if not request.POST.settlementCamp %}class="invalid"{% endif %}>
+                            <option value="">-- Select settlement camp --</option>
+                            <option value="Gulu" {% if request.POST.settlementCamp == 'Gulu' %}selected{% endif %}>Gulu</option>
+                            <option value="Arua" {% if request.POST.settlementCamp == 'Arua' %}selected{% endif %}>Arua</option>
+                            <option value="Mbarara" {% if request.POST.settlementCamp == 'Mbarara' %}selected{% endif %}>Mbarara</option>
+                            <option value="Kasese" {% if request.POST.settlementCamp == 'Kasese' %}selected{% endif %}>Kasese</option>
+                            <option value="Busia" {% if request.POST.settlementCamp == 'Busia' %}selected{% endif %}>Busia</option>
+                            <option value="Mbale" {% if request.POST.settlementCamp == 'Mbale' %}selected{% endif %}>Mbale</option>
+                            <option value="Kigezi" {% if request.POST.settlementCamp == 'Kigezi' %}selected{% endif %}>Kigezi</option>
+                        </select>
+                        {% if request.POST and not request.POST.settlementCamp %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.registrationDate %}has-error{% endif %}">
+                        <label for="registrationDate">Date of registration <span>*</span></label>
+                        <input id="registrationDate" name="registrationDate" type="date" value="{{ request.POST.registrationDate|default:'' }}" {% if not request.POST.registrationDate %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.registrationDate %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+
+                    <div class="field-group {% if request.POST and not request.POST.dateOfJoining %}has-error{% endif %}">
+                        <label for="dateOfJoining">Date of joining settlement camp <span>*</span></label>
+                        <input id="dateOfJoining" name="dateOfJoining" type="date" value="{{ request.POST.dateOfJoining|default:'' }}" {% if not request.POST.dateOfJoining %}class="invalid"{% endif %}>
+                        {% if request.POST and not request.POST.dateOfJoining %}<small class="error-text">This field is required</small>{% else %}<small class="error-text"></small>{% endif %}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="register-btn">Register</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

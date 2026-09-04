@@ -1,0 +1,19 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FCA Refugee Support Program</title>
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="landing-page">
+	<main class="landing-content" aria-labelledby="landing-title">
+		<div class="logo-circle">
+			<img src="{% static 'logo & colors/fca-logo.jpg' %}" alt="FCA">
+		</div>
+		<h1 id="landing-title">Refugee Support Program</h1>
+		<a class="register-button" href="{% url 'register' %}">Register</a>
+	</main>
+</body>
+</html>

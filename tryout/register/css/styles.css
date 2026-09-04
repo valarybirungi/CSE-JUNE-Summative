@@ -1,0 +1,55 @@
+:root { --pale-green: #a8c957; --deep-green: #315239; --ink: #26352c; --muted: #68756b; --line: #cbd8c4; --paper: #fffdf5; --danger: #bf3c2d; --success: #39734a; --hand: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; --body: "Trebuchet MS", sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: #edf2e9; font-family: var(--body); }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.app-shell { min-height: 100vh; }
+.landing-view { min-height: 100vh; display: grid; place-items: center; padding: 32px; background-color: var(--pale-green); background-image: linear-gradient(135deg, #ffffff18 25%, transparent 25%), linear-gradient(315deg, #31523916 25%, transparent 25%); background-size: 34px 34px; }
+.brand-lockup { width: min(500px, 100%); text-align: center; color: white; animation: rise .65s ease both; }
+.logo-mark { width: 154px; height: 154px; display: grid; place-items: center; margin: 0 auto 28px; border: 3px solid var(--deep-green); border-radius: 47% 53% 50% 46%; background: white; color: var(--pale-green); font-family: var(--hand); font-size: 54px; font-weight: 700; transform: rotate(-3deg); box-shadow: 7px 9px 0 #31523944; }
+.brand-lockup h1, .brand-panel h2 { margin: 0; font-family: var(--hand); font-weight: 700; letter-spacing: 0; }
+.brand-lockup h1 { font-size: clamp(42px, 7vw, 68px); line-height: .95; }
+.brand-lockup p { margin: 20px auto 34px; max-width: 360px; font-size: 15px; line-height: 1.7; color: #f6ffe9; }
+.button { border: 2px solid currentColor; border-radius: 3px 7px 4px 6px; padding: 13px 22px; font-family: var(--hand); font-weight: 700; transition: transform .2s, box-shadow .2s, background .2s; }
+.button:hover { transform: translateY(-2px); }
+.button-light { min-width: 260px; background: white; color: var(--deep-green); box-shadow: 0 8px 18px #4c711c55; }
+.button-primary { background: var(--pale-green); color: var(--deep-green); box-shadow: 0 7px 14px #38572330; }
+.button-ghost { background: transparent; color: var(--deep-green); }
+.registration-view { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 42%); padding: 0; background: var(--paper); }
+.brand-panel { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(34px, 7vw, 100px) clamp(28px, 6vw, 90px) 30px; background-color: var(--pale-green); background-image: repeating-linear-gradient(0deg, transparent, transparent 31px, #31523912 32px); color: white; }
+.brand-panel { grid-column: 2; grid-row: 1; }
+.brand-panel-inner { max-width: 360px; margin: auto 0; }
+.logo-mark-large { width: 220px; height: 220px; margin: 0 0 30px; font-size: 94px; }
+.eyebrow { margin: 0 0 10px; color: var(--pale-green); font-size: 11px; font-weight: 700; letter-spacing: 1.8px; }
+.brand-panel .eyebrow { color: #efffd0; }
+.brand-panel h2 { font-size: clamp(38px, 4vw, 58px); line-height: .95; }
+.brand-copy { max-width: 270px; margin-top: 22px; line-height: 1.7; color: #f5ffdf; }
+.panel-footer { font-size: 11px; letter-spacing: 1px; opacity: .8; }
+.form-panel { grid-column: 1; grid-row: 1; width: min(900px, 100%); padding: clamp(30px, 5vw, 70px) clamp(22px, 6vw, 90px); margin: 0 auto; background: var(--paper); }
+.image-box { width: 100%; }
+.form-heading { display: flex; justify-content: space-between; align-items: start; margin-bottom: 28px; }
+.form-heading h2 { margin: 0; color: var(--deep-green); font-family: var(--hand); font-size: clamp(36px, 5vw, 56px); line-height: 1.05; }
+.icon-button, .alert-close { border: 0; background: transparent; color: var(--deep-green); font-size: 28px; }
+.alert { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; margin-bottom: 22px; border-radius: 4px; color: white; font-size: 13px; animation: rise .3s ease both; }
+.alert-success { background: var(--success); }
+.alert-close { color: white; line-height: 1; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 21px 14px; }
+.field { min-width: 0; }
+.field-wide { grid-column: 1 / -1; max-width: calc(50% - 7px); }
+label, legend { display: block; margin-bottom: 8px; color: var(--deep-green); font-family: var(--hand); font-size: 17px; font-weight: 700; }
+label span { color: var(--danger); }
+input, select { width: 100%; height: 53px; padding: 0 16px; border: 1px solid #9fbd80; border-radius: 2px 5px 3px 4px; outline: none; background: #fff; color: var(--ink); }
+input::placeholder { color: #a4aaa2; }
+input:focus, select:focus { border-color: var(--deep-green); box-shadow: 0 0 0 3px #99cc3230; }
+.field.invalid input, .field.invalid select { border: 1px solid var(--danger); background: #fff8f7; }
+.error-message { display: block; min-height: 16px; padding-top: 5px; color: var(--danger); font-size: 11px; }
+.gender-field { margin: 20px 0 21px; padding: 0; border: 0; }
+.radio-row { display: flex; min-height: 66px; align-items: center; gap: clamp(35px, 10vw, 130px); padding: 0 58px; border: 1px solid #bddb75; }
+.radio-option { display: flex; align-items: center; gap: 10px; margin: 0; font-family: var(--body); font-size: 15px; font-weight: 400; }
+.radio-option input { width: 22px; height: 22px; accent-color: var(--pale-green); }
+.form-actions { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 25px; }
+.form-actions .button-primary { min-width: 230px; }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 780px) { .registration-view { display: flex; flex-direction: column; } .brand-panel { order: 2; min-height: 260px; padding: 32px 24px; } .brand-panel-inner { margin: 0; } .logo-mark-large { width: 110px; height: 110px; margin-bottom: 18px; font-size: 48px; } .brand-panel h2 { font-size: 38px; } .brand-copy, .panel-footer { display: none; } .form-panel { order: 1; padding: 34px 20px 45px; } .field-wide { max-width: none; } }
+@media (max-width: 520px) { .form-grid { grid-template-columns: 1fr; gap: 11px; } .field-wide { grid-column: auto; } .radio-row { padding: 0 20px; gap: 24px; } .form-actions { flex-direction: column-reverse; align-items: stretch; } .form-actions .button-primary { width: 100%; } }
+[hidden] { display: none !important; }

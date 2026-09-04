@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCA Refugee Support Program</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+  <main id="app" class="app-shell" aria-live="polite">
+    {% if not show_form %}<section id="landing" class="landing-view view-active" aria-labelledby="landing-title">
+      <div class="brand-lockup">
+        <div class="logo-mark" aria-label="FCA logo">FCA</div>
+        <h1 id="landing-title">Refugee Support Program</h1>
+        <p>Every registration helps us connect families with practical support.</p>
+        <a class="button button-light" id="start-button" href="/register/">Register a beneficiary <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </section>{% endif %}
+
+    {% if show_form %}<section id="registration" class="registration-view container-fluid" aria-labelledby="form-title">
+      <aside class="brand-panel">
+        <div class="brand-panel-inner image-box">
+          <div class="logo-mark logo-mark-large" aria-label="FCA logo">FCA</div>
+          <p class="eyebrow">FCA COMMUNITY CARE</p>
+          <h2>Refugee Support Program</h2>
+          <p class="brand-copy">A simple record today creates a clearer path to support tomorrow.</p>
+        </div>
+        <div class="panel-footer">FCA &middot; Human dignity in action</div>
+      </aside>
+
+      <div class="form-panel">
+        <div class="form-heading">
+          <div>
+            <p class="eyebrow">BENEFICIARY INTAKE</p>
+            <h2 id="form-title">Beneficiary registration form</h2>
+          </div>
+          <a id="back-button" class="icon-button" href="/" aria-label="Back to landing page" title="Back to landing page">&#8592;</a>
+        </div>
+
+        {% if success %}<div id="success-alert" class="alert alert-success" role="alert">
+          <span><strong>Registration complete.</strong> Beneficiary saved successfully.</span>
+          <a id="close-alert" class="alert-close" href="/register/" aria-label="Close success alert">&times;</a>
+        </div>{% endif %}
+
+        <form id="beneficiary-form" method="post" action="/register/" class="form rounded shadow-sm" novalidate>
+          {% csrf_token %}
+          {% if form.non_field_errors %}<div class="alert alert-error">{{ form.non_field_errors }}</div>{% endif %}
+          <div class="form-grid">
+            <div class="field">
+              <label for="firstName">First name <span>*</span></label>
+              <input id="firstName" name="firstName" type="text" placeholder="Enter first name" autocomplete="given-name">
+              <small class="error-message" data-error-for="firstName"></small>
+            </div>
+            <div class="field">
+              <label for="lastName">Last name <span>*</span></label>
+              <input id="lastName" name="lastName" type="text" placeholder="Enter last name" autocomplete="family-name">
+              <small class="error-message" data-error-for="lastName"></small>
+            </div>
+            <div class="field">
+              <label for="dateOfBirth">Date of birth <span>*</span></label>
+              <input id="dateOfBirth" name="dateOfBirth" type="date">
+              <small class="error-message" data-error-for="dateOfBirth"></small>
+            </div>
+            <div class="field">
+              <label for="placeOfBirth">Place of birth <span>*</span></label>
+              <input id="placeOfBirth" name="placeOfBirth" type="text" placeholder="Enter place of birth">
+              <small class="error-message" data-error-for="placeOfBirth"></small>
+            </div>
+          </div>
+
+          <fieldset class="field gender-field">
+            <legend>Gender</legend>
+            <div class="radio-row">
+              <label class="radio-option"><input type="radio" name="gender" value="Male"><span>Male</span></label>
+              <label class="radio-option"><input type="radio" name="gender" value="Female" checked><span>Female</span></label>
+            </div>
+          </fieldset>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="nationality">Nationality <span>*</span></label>
+              <select id="nationality" name="nationality">
+                <option value="">Select nationality</option>
+                <option>Ugandan</option><option>Kenyan</option><option>Tanzanian</option><option>Burundian</option><option>Rwandese</option><option>Somali</option><option>South Sudanese</option>
+              </select>
+              <small class="error-message" data-error-for="nationality"></small>
+            </div>
+            <div class="field">
+              <label for="maritalStatus">Marital status <span>*</span></label>
+              <select id="maritalStatus" name="maritalStatus">
+                <option value="">Select marital status</option>
+                <option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option><option>Separated</option>
+              </select>
+              <small class="error-message" data-error-for="maritalStatus"></small>
+            </div>
+            <div class="field">
+              <label for="settlementCamp">Settlement camp <span>*</span></label>
+              <select id="settlementCamp" name="settlementCamp">
+                <option value="">Select settlement camp</option>
+                <option>Gulu settlement camp</option><option>Arua settlement camp</option><option>Mbarara settlement camp</option><option>Kasese settlement camp</option><option>Busia settlement camp</option><option>Mbale settlement camp</option><option>Kigezi settlement camp</option>
+              </select>
+              <small class="error-message" data-error-for="settlementCamp"></small>
+            </div>
+            <div class="field">
+              <label for="registrationDate">Date of registration <span>*</span></label>
+              <input id="registrationDate" name="registrationDate" type="date">
+              <small class="error-message" data-error-for="registrationDate"></small>
+            </div>
+            <div class="field field-wide">
+              <label for="dateOfJoining">Date of joining settlement camp <span>*</span></label>
+              <input id="dateOfJoining" name="dateOfJoining" type="date">
+              <small class="error-message" data-error-for="dateOfJoining"></small>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="button button-ghost" id="reset-button" type="reset">Clear form</button>
+            <button class="button button-primary" type="submit">Register beneficiary <span aria-hidden="true">&#8594;</span></button>
+          </div>
+        </form>
+      </div>
+    </section>{% endif %}
+  </main>
+</body>
+</html>

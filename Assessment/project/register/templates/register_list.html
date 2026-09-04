@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registered Beneficiaries</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="register-list-page">
+    <main class="register-list-shell">
+        <header class="register-list-header">
+            <h1>Registered Beneficiaries</h1>
+            <a class="register-button" href="{% url 'register' %}">Add beneficiary</a>
+        </header>
+
+        {% if beneficiaries %}
+            <div class="register-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Date of birth</th>
+                            <th>Gender</th>
+                            <th>Nationality</th>
+                            <th>Marital status</th>
+                            <th>Settlement camp</th>
+                            <th>Registration date</th>
+                            <th>Date of joining</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for beneficiary in beneficiaries %}
+                            <tr>
+                                <td>{{ beneficiary.first_name }}</td>
+                                <td>{{ beneficiary.last_name }}</td>
+                                <td>{{ beneficiary.date_of_birth|date:"d/m/Y" }}</td>
+                                <td>{{ beneficiary.gender }}</td>
+                                <td>{{ beneficiary.nationality }}</td>
+                                <td>{{ beneficiary.marital_status }}</td>
+                                <td>{{ beneficiary.settlement_camp }}</td>
+                                <td>{{ beneficiary.registration_date|date:"d/m/Y" }}</td>
+                                <td>{{ beneficiary.date_of_joining|date:"d/m/Y" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty-register-list">No beneficiaries have been registered yet.</p>
+        {% endif %}
+    </main>
+</body>
+</html>
